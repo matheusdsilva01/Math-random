@@ -1,32 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const responseCalc = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    setNum1(Math.floor(Math.random() * 10 + 1));
+    setNum2(Math.floor(Math.random() * 10 + 1));
+  }, [])
+
+  const newCount = () => {
+    setNum1(Math.floor(Math.random() * 10 + 1));
+    setNum2(Math.floor(Math.random() * 10 + 1));
+    responseCalc.current!.value = ""
+  }
+
+  const calculation = (e: FormEvent) => {
+    e.preventDefault()
+    let sum = num1 + num2
+    let response = responseCalc.current?.value;
+    if (sum === Number(response)) {
+      console.log("acertou!");
+      newCount();
+    } else {
+      console.log("errou!");
+    }
+  }
+
+
+  
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <section>
+        <form onSubmit={calculation}>
+          <h1>{num1} + {num2} = <input type="number" ref={responseCalc} /></h1>
+        </form>
+      </section>
     </div>
   )
 }
