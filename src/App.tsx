@@ -1,9 +1,14 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import './App.css';
+import TableHitsandErrors from './components/TableHitsandErrors';
+import { Calculation } from './interfaces/Calculation';
+
 
 function App() {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
+  const [hits, setHits] = useState<Calculation[]>([]);
+  const [errors, setErrors] = useState<Calculation[]>([]);
   const responseCalc = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -19,25 +24,44 @@ function App() {
 
   const calculation = (e: FormEvent) => {
     e.preventDefault()
-    let sum = num1 + num2
+    let conta = `${num1} + ${num2}`
     let response = responseCalc.current?.value;
-    if (sum === Number(response)) {
-      console.log("acertou!");
+    if (num1 + num2 === Number(response)) {
+
+      addAcert(conta, Number(response))
       newCount();
     } else {
-      console.log("errou!");
+      addError(conta, Number(response))
     }
   }
 
+  const addAcert = (conta: string, resposta: number) => {
+    let acert = {
+      conta,
+      resposta
+    }
+    setHits((state) => [...state, acert])
+  }
 
-  
+  const addError = (conta: string, resposta: number) => {
+    let error = {
+      conta,
+      resposta
+    }
+    errors.filter((el) => el.conta === conta).length < 1 ?
+    setErrors((state) => [...state, error]): null
+  }
+
+
+
   return (
     <div className="App">
       <section>
-        <form onSubmit={calculation}>
-          <h1>{num1} + {num2} = <input type="number" ref={responseCalc} /></h1>
+        <form className='container-form' onSubmit={calculation}>
+          <h1>{num1} + {num2} = <input required type="number" ref={responseCalc} /></h1>
         </form>
       </section>
+      <TableHitsandErrors hits={hits} errors={errors} />
     </div>
   )
 }
