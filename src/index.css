@@ -1,6 +1,12 @@
-:root {
+body {
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
   display: flex;
-  justify-content: center;
+}
+
+.container-form {
+  width: 100%;
+  padding: 20px 0;
+  font-size: large;
+  text-align: center;
 }
