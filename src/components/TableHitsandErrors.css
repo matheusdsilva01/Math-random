@@ -2,7 +2,7 @@ li {
     list-style: none;
 }
 
-table.container {
+table.container tbody {
     width: 100vw;
     display: flex;
     flex-wrap: wrap;
@@ -12,7 +12,7 @@ table.container {
 
 tr.table {
     text-align: center;
-    border: 1px #fff solid;
+    border: 1px #000 solid;
     width: 400px;
     max-height: 500px;
     scroll-behavior: smooth;
@@ -23,11 +23,7 @@ tr.table {
     flex-direction: column;
 }
 
-.table td:nth-child(even) {
-    border-color: #000;
-}
-
-.table td {
-    background-color: #2c2c2c;
-    border: 1px #fff solid;
+.table td:not(:first-child) {
+    background-color: #fff;
+    border: 1px #2c2c2c solid;
 }
