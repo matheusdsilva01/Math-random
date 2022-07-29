@@ -70,3 +70,17 @@
     border-radius: 50%;
   }
   
+  @media screen and (max-width: 600px) {
+    .switch {
+      width: max-content;
+      position: absolute;
+      top: 15px !important;
+      right: 50px !important;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: none;
+      -ms-transform: none;
+      transform: none;
+    }    
+  }

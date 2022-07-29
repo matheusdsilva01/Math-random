@@ -54,13 +54,13 @@ function App() {
 
   return (
     <div className="App">
+      <ToggleTheme />
       <section>
         <form className='container-form' onSubmit={calculation}>
           <h1>{num1} + {num2} = <input required type="number" ref={responseCalc} /></h1>
         </form>
       </section>
       <TableHitsandErrors hits={hits} errors={errors} />
-      <ToggleTheme />
     </div>
   )
 }

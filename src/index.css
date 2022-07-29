@@ -1,6 +1,7 @@
 @import './App.css';
 
 body {
+  font-family: 'Open Sans', sans-serif;
   color: var(--black);
   background-color: var(--white-transparent);
   display: flex;
