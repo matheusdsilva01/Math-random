@@ -1,6 +1,8 @@
+@import './App.css';
+
 body {
-  color: #242424;
-  background-color: #ffffffde;
+  color: var(--black);
+  background-color: var(--white-transparent);
   display: flex;
 }
 

@@ -1,9 +1,15 @@
+@import '../../App.css';
+
 li {
     list-style: none;
 }
 
-table.container tbody {
+table.container {
     width: 100vw;
+}
+
+table.container tbody {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -12,7 +18,7 @@ table.container tbody {
 
 tr.table {
     text-align: center;
-    border: 1px #000 solid;
+    border: 1px var(--black) solid;
     width: 400px;
     max-height: 500px;
     scroll-behavior: smooth;
@@ -23,7 +29,11 @@ tr.table {
     flex-direction: column;
 }
 
+.table td:first-child {
+    border-bottom: 1px var(--black) solid;
+}
+
 .table td:not(:first-child) {
-    background-color: #fff;
-    border: 1px #2c2c2c solid;
+    background-color: var(--white);
+    border: 1px var(--gray) solid;
 }

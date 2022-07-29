@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import './App.css';
-import TableHitsandErrors from './components/TableHitsandErrors';
+import TableHitsandErrors from './components/TableHitsandErrors/TableHitsandErrors';
+import ToggleTheme from './components/ToggleTheme/ToggleTheme';
 import { Calculation } from './interfaces/Calculation';
 
 
@@ -10,7 +11,6 @@ function App() {
   const [hits, setHits] = useState<Calculation[]>([]);
   const [errors, setErrors] = useState<Calculation[]>([]);
   const responseCalc = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     setNum1(Math.floor(Math.random() * 10 + 1));
     setNum2(Math.floor(Math.random() * 10 + 1));
@@ -49,10 +49,8 @@ function App() {
       resposta
     }
     errors.filter((el) => el.conta === conta).length < 1 ?
-    setErrors((state) => [...state, error]): null
+      setErrors((state) => [...state, error]) : null
   }
-
-
 
   return (
     <div className="App">
@@ -62,6 +60,7 @@ function App() {
         </form>
       </section>
       <TableHitsandErrors hits={hits} errors={errors} />
+      <ToggleTheme />
     </div>
   )
 }

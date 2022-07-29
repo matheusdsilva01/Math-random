@@ -3,3 +3,11 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
+:root{
+  --black: #000;
+  --black-transparent: #242424;
+  --gray: #2c2c2c;
+  --white: #fff;
+  --white-transparent: #ffffffde;
+}
