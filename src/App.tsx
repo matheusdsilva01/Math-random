@@ -9,9 +9,11 @@ function App() {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const [operator, setOperator] = useState<string | null>(null);
+  const [operationRandom, setOperationRandom] = useState<boolean>(false);
   const [hits, setHits] = useState<Calculation[]>([]);
   const [errors, setErrors] = useState<Calculation[]>([]);
   const responseCalc = useRef<HTMLInputElement>(null);
+  
   
   useEffect(() => {
     if (!operator) {
@@ -22,7 +24,10 @@ function App() {
     setNum1(Math.floor(Math.random() * 10 + 1));
     setNum2(Math.floor(Math.random() * 10 + 1));
   }, [operator])
-
+  
+  /**
+   * Função para criar uma nova conta
+   */
   const newCount = () => {
     setNum1(Math.floor(Math.random() * 10 + 1));
     setNum2(Math.floor(Math.random() * 10 + 1));
