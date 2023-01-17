@@ -1,65 +1,41 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
-import './App.css';
+import { FormEvent, useRef, useState } from 'react';
 import TableHitsandErrors from './components/TableHitsandErrors/TableHitsandErrors';
 import ToggleTheme from './components/ToggleTheme/ToggleTheme';
 import { Calculation } from './interfaces/Calculation';
-
+import { generateCalculation, operatorsType } from './util/generateCalculation';
+import './App.css';
 
 function App() {
-  const [num1, setNum1] = useState(0);
-  const [num2, setNum2] = useState(0);
-  const [operator, setOperator] = useState<string | null>(null);
-  const [operationRandom, setOperationRandom] = useState<boolean>(false);
+  const [operator, setOperator] = useState<operatorsType>();
   const [hits, setHits] = useState<Calculation[]>([]);
   const [errors, setErrors] = useState<Calculation[]>([]);
   const responseCalc = useRef<HTMLInputElement>(null);
-  
-  
-  useEffect(() => {
-    if (!operator) {
-      let operations = ['+', '-', '*', '/'];
-      let randomOperator = Math.floor(Math.random() * 4);
-      setOperator(operations[randomOperator]);
-    }
-    setNum1(Math.floor(Math.random() * 10 + 1));
-    setNum2(Math.floor(Math.random() * 10 + 1));
-  }, [operator])
-  
-  /**
-   * Função para criar uma nova conta
-   */
-  const newCount = () => {
-    setNum1(Math.floor(Math.random() * 10 + 1));
-    setNum2(Math.floor(Math.random() * 10 + 1));
-    responseCalc.current!.value = ""
-  }
+  const count = generateCalculation(operator);
 
   const calculation = (e: FormEvent) => {
     e.preventDefault()
-    let conta = `${num1} ${operator} ${num2}`
     let response = responseCalc.current?.value;
-    if (eval(conta) === Number(response)) {
-      addAcert(conta, Number(response))
-      newCount();
+    if (eval(count) === Number(response)) {
+      addHit(count, Number(response))
     } else {
-      addError(conta, Number(response))
+      addError(count, Number(response))
     }
   }
 
-  const addAcert = (conta: string, resposta: number) => {
-    let acert = {
-      conta,
-      resposta
+  const addHit = (count: string, response: number) => {
+    let hit = {
+      conta: count,
+      resposta: response
     }
-    setHits((state) => [...state, acert])
+    setHits((state) => [...state, hit])
   }
 
-  const addError = (conta: string, resposta: number) => {
+  const addError = (count: string, response: number) => {
     let error = {
-      conta,
-      resposta
+      conta: count,
+      resposta: response
     }
-    errors.filter((el) => el.conta === conta).length < 1 ?
+    errors.filter((el) => el.conta === count).length < 1 ?
       setErrors((state) => [...state, error]) : null
   }
 
@@ -68,13 +44,12 @@ function App() {
       <ToggleTheme />
       <section>
         <form className='container-form' onSubmit={calculation}>
-          <h1>{num1} {operator} {num2} = <input required type="number" step={".01"} ref={responseCalc} /></h1>
+          <h1>{count} = <input required type="number" step={".01"} ref={responseCalc} /></h1>
           <select
             name="operacoes"
-            defaultValue={'null'}
-            onChange={(e) => {setOperator(e.target.value)}}
+            onChange={(e) => setOperator(e.target.value as operatorsType)}
           >
-            <option value=''>Aleatório</option>
+            <option value="">Aleatório</option>
             <option value="+">Adição</option>
             <option value="-">Subtração</option>
             <option value="*">Multiplicação</option>
