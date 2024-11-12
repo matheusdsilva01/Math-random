@@ -1,10 +1,16 @@
 @import './App.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Chelsea Market", system-ui;
+  font-weight: 400;
+  font-style: normal;
   color: var(--black);
-  background-color: var(--white-transparent);
-  display: flex;
+  min-height: 100dvh;
+  @apply bg-gradient-to-b from-yellow-200 to-orange-300;
 }
 
 .container-form {

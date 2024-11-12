@@ -1,4 +1,5 @@
 export interface Calculation {
     conta: string;
-    resposta: number;
+    response: number;
+    isCorrect: boolean;
 }

@@ -9,17 +9,3 @@
   right: 15px;
   cursor: pointer;
 }
-
-@media screen and (max-width: 600px) {
-  .App > section {
-    margin-top: 40px;
-  }
-}
-
-:root {
-  --black: #000;
-  --black-transparent: #242424;
-  --gray: #2c2c2c;
-  --white: #fff;
-  --white-transparent: #ffffffde;
-}
