@@ -55,7 +55,7 @@ function App() {
           className="w-full py-5 text-center font-semibold flex flex-col max-w-[625px] m-auto mt-32 sm:mt-52 px-4 bg-slate-50 shadow-lg rounded-3xl"
           onSubmit={calculation}
         >
-          <h2 className="text-2xl font-sans font-bold text-[#ED47D7] mb-4">Escolha uma operação: </h2>
+          <h2 className="text-2xl font-sans font-bold text-[#ED47D7] mb-4">Contas de Matemática! 🧮</h2>
           <section className="flex flex-row justify-center flex-wrap mb-2 gap-3">
             <button
               type="button"
